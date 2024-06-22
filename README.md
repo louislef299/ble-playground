@@ -1,0 +1,1 @@
+https://learn.adafruit.com/introduction-to-bluetooth-low-energy/gap
