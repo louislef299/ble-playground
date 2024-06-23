@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -32,7 +33,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	println("advertising...")
+	fmt.Println("advertising...")
 	for {
 		// Sleep forever.
 		time.Sleep(time.Hour)
