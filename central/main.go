@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"tinygo.org/x/bluetooth"
 )
@@ -22,7 +23,16 @@ func main() {
 	// Start scanning.
 	println("scanning...")
 	err = adapter.Scan(func(adapter *bluetooth.Adapter, result bluetooth.ScanResult) {
-		//println("found device:", result.Address.String(), result.RSSI, result.LocalName())
+		fmt.Println("found device:", result.Address.String(), result.RSSI, result.LocalName())
+		if len(result.ManufacturerData()) > 0 {
+			fmt.Print("here is the manufacturer data:")
+			for _, m := range result.ManufacturerData() {
+				fmt.Print(" ", m.CompanyID)
+			}
+			fmt.Println()
+		}
+		time.Sleep(time.Second)
+
 		if result.AdvertisementPayload.LocalName() == targetDevice {
 			adapter.StopScan()
 			log.Printf("found target device %s with address %s\n", targetDevice, result.Address.String())
